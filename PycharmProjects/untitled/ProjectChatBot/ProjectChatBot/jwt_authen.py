@@ -29,14 +29,14 @@ def create_token(userid, username, password, menu_access, ip_request, browser_re
     for obj_old in reversed(jwt_toket_memory_authen):
         if obj_old['username'] == username:
             time_old_str = obj_old['time']
-            time_old_fr = datetime.strftime(time_old_str, "%d-%m-%Y %H:%M:%S")
-            time_now_fr = datetime.strftime(time_now_str, "%d-%m-%Y %H:%M:%S")
+            time_old_fr = datetime.strptime(time_old_str, "%d-%m-%Y %H:%M:%S")
+            time_now_fr = datetime.strptime(time_now_str, "%d-%m-%Y %H:%M:%S")
 
             duration_time = time_now_fr - time_old_fr
 
             duration_minutes = duration_time.seconds / 60
 
-            if duration_minutes > 30:
+            if duration_minutes > 1:
                 jwt_toket_memory_authen.remove(obj_old)
 
     user_memory_jwt = {
@@ -70,9 +70,9 @@ def vertify_token(token):
             if obj_old['username'] == username and obj_old['password'] == password and obj_old['ip'] == ip_request and \
                     obj_old['browser'] == browser_request:
                 time_old_str = obj_old['time']
-                time_now_str = datetime.now().strftime('%d-%m-%y %H-%M-%S')
-                old_time_fr = datetime.strftime(time_old_str, '%d-%m-%y %H-%M-%S')
-                now_time_fr = datetime.strftime(time_now_str, '%d-%m-%y %H-%M-%S')
+                time_now_str = datetime.now().strptime('%d-%m-%y %H-%M-%S')
+                old_time_fr = datetime.strptime(time_old_str, '%d-%m-%y %H-%M-%S')
+                now_time_fr = datetime.strptime(time_now_str, '%d-%m-%y %H-%M-%S')
 
                 duration_time = now_time_fr - old_time_fr
 
@@ -82,7 +82,7 @@ def vertify_token(token):
                     flag_check_done = False
 
                 else:
-                    obj_old['time'] = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+                    obj_old['time'] = datetime.now().strptime("%d-%m-%Y %H:%M:%S")
                     global_config.GLB_USER_ID = userid
                     global_config.GLB_USER_NAME = username
 
