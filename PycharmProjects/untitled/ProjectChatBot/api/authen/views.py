@@ -10,7 +10,6 @@ from rest_framework.response import Response
 from . import contains, models
 from ProjectChatBot import jwt_authen
 
-
 @api_view(['POST'])
 @parser_classes([JSONParser])
 @renderer_classes([JSONRenderer])
@@ -32,7 +31,6 @@ def login(request):
         if code_output == 0:
             user_id = data_output['user_id']
             token = jwt_authen.create_token(user_id, obj_login['user_name'], obj_login['password'], menu_access,ip_request, browser_request)
-
         response = contains.get_response_authen(code_output)
         response['token'] = token
         response['code'] = code_output
@@ -52,8 +50,7 @@ def logout(request):
             response = contains.get_response_logout(0)
         else:
             response = contains.get_response_logout(777)
-
     except Exception as e:
-        print("authen.views -> login -> ex", e)
+        print("authen.views -> logout -> ex", e)
 
     return Response(response)

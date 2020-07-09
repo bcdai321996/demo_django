@@ -24,7 +24,7 @@ def get_response_authen(code):
 
     return response
 
-
+# Logout
 def get_response_logout(code):
     response = {
         'code': 200,
