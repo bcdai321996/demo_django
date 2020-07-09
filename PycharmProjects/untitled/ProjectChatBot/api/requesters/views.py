@@ -13,12 +13,12 @@ from . import contains, models
 @parser_classes([JSONParser])
 @renderer_classes([JSONRenderer])
 def get_requester(request):
+    print(request.META)
     try:
         response = contains.get_response_list_requester(None)
-        data_output = models.get_requester()
+        data_output = models.login()
         code_output = data_output['code']
         contains.get_response_list_requester(code_output)
-        response['list_requester'] = data_output['list_requester']
 
     except Exception as e:
         print("requesters.views -> get_requester -> ex", e)

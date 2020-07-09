@@ -86,6 +86,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ProjectChatBot.wsgi.application'
 
+EVERCALL_API_URL_ACCESS = ['/', '/rest/api/authen/login']
+EVERCALL_API_PERMISSION_ACCESS = ['/rest/api/authen/logout']
+
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
