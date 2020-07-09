@@ -41,17 +41,19 @@ def login_requester(request):
 
     return Response(response)
 
-
+@api_view(['POST'])
+@parser_classes([JSONParser])
+@renderer_classes([JSONRenderer])
 def logout_requester(request):
     print(request.META)
-    response = contains.get_response_logout(None)
+    response = contains.get_response_logout_requester(None)
     try:
         token = request.META['HTTP_AUTHORIZATION']
         check_token = jwt_authen.remove_token(token)
         if check_token:
-            response = contains.get_response_logout(0)
+            response = contains.get_response_logout_requester(0)
         else:
-            response = contains.get_response_logout(777)
+            response = contains.get_response_logout_requester(777)
     except Exception as e:
         print("authen.views -> logout -> ex", e)
 

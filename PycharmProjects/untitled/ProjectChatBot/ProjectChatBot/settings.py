@@ -26,7 +26,9 @@ SECRET_KEY = 'i$!c+=bd26dem_umfg1pjnek)^fo!5s6k3xj51u$5j+=_#zvd6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
 
@@ -64,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'ProjectChatBot.middleware.PermissionMiddleware'
 ]
 
 ROOT_URLCONF = 'ProjectChatBot.urls'
@@ -86,8 +89,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ProjectChatBot.wsgi.application'
 
-EVERCALL_API_URL_ACCESS = ['/', '/rest/api/authen/login']
-EVERCALL_API_PERMISSION_ACCESS = ['/rest/api/authen/logout']
+API_URL_ACCESS = ['/', '/rest/api/authen/login_requester']
+API_PERMISSION_ACCESS = ['/rest/api/authen/logout']
 
 
 # Database

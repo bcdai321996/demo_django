@@ -22,7 +22,7 @@ class PermissionMiddleware(MiddlewareMixin):
             global_config.GLB_USER_IP_ADDRESS = ip_request
             global_config.GLB_USER_PC_NAME = server_name
 
-            url_access_request  = settings.EVERCALL_API_URL_ACCESS
+            url_access_request  = settings.API_URL_ACCESS
             url_access_request_flag = False
 
             for val1 in url_access_request:
@@ -34,18 +34,26 @@ class PermissionMiddleware(MiddlewareMixin):
                 token_request = request.META['HTTP_AUTHORIZATION']
                 flag_check_token = jwt_authen.vertify_token(token_request)
                 print(flag_check_token)
+                if flag_check_token:
+                    permission_access_request = settings.API_PERMISSION_ACCESS
+                    permission_access_request_flag = False
 
-            if flag_check_token:
-                permission_access_request = settings.EVERCALL_API_PERMISSION_ACCESS
-                permission_access_request_flag = False
+                    for val2 in permission_access_request:
+                            if url_request.find(val2) != -1:
+                                permission_access_request_flag = True
+                                print("permission_access_request_flag", permission_access_request_flag)
+                                break
 
-                for val2 in permission_access_request:
-                    if val2 == permission_access_request:
-                        print(url_request)
-                        if url_request.find(val2) != -1:
-                            permission_access_request_flag = True
-                            break
-
+                    if not permission_access_request_flag:
+                        flag_check_permission = True
+                        print(flag_check_permission)
+                else:
+                    return JsonResponse(
+                        {
+                            "code": 333,
+                            "message": "Token is incorrect"
+                        }
+                    )
 
         except Exception as e:
             print("PermissionMiddleware.process_request -> ex", e)
