@@ -6,7 +6,7 @@
 from rest_framework import status
 
 
-def get_response_authen(code):
+def get_response_authen_reqquester(code):
     response = {
         'code': 200,
         'message': 'Execute successfully',
@@ -24,8 +24,8 @@ def get_response_authen(code):
 
     return response
 
-# Logout
-def get_response_logout(code):
+# Logout requester
+def get_response_logout_requester(code):
     response = {
         'code': 200,
         'message': 'Execute successfully',

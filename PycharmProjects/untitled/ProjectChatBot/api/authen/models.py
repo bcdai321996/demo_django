@@ -5,7 +5,7 @@
 from utils import response_json_common, common_conection
 
 
-def login(obj_login):
+def login_requester(obj_login):
     connection = None
     cursor = None
     list_requesters = []
