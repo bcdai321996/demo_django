@@ -41,6 +41,7 @@ def login_requester(request):
 
     return Response(response)
 
+
 @api_view(['POST'])
 @parser_classes([JSONParser])
 @renderer_classes([JSONRenderer])
