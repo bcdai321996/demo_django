@@ -24,8 +24,13 @@ def get_response_authen_reqquester(code):
 
     return response
 
+<<<<<<< HEAD
 # Logout requester
 def get_response_logout_requester(code):
+=======
+
+def get_response_logout(code):
+>>>>>>> parent of b3781a8... refacter code
     response = {
         'code': 200,
         'message': 'Execute successfully',
